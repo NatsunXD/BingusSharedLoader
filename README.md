@@ -3,7 +3,7 @@
 # Bingus Shared Loader
 
 > [!IMPORTANT]
-> **Required dependency for Know Your Constellation, Controllable Hover Pack, Vehicle Stability, Enemy Collision Synchronized, Vanilla Plus Megapack or the separate Better Stratagem Bounce, Hellpod Steering Unlocked, Reinforcement Beacons Fixed, Consistent Vaulting, Shallow Water Diving and Sentry Aim Retention mods.** Install with **Arsenal or HD2MM**: import `Bingus-Shared-Loader-v12.zip`, enable it alongside the megapack or your chosen mods, then click **Deploy**. One loader installation supports all your selected mods.
+> **Required dependency for Enemy Spawn Multiplier, Know Your Constellation, Controllable Hover Pack, Vehicle Stability, Enemy Collision Synchronized, Vanilla Plus Megapack or the separate Better Stratagem Bounce, Hellpod Steering Unlocked, Reinforcement Beacons Fixed, Consistent Vaulting, Shallow Water Diving and Sentry Aim Retention mods.** Install with **Arsenal or HD2MM**: import `Bingus-Shared-Loader-v12.zip`, enable it alongside the megapack or your chosen mods, then click **Deploy**. One loader installation supports all your selected mods.
 >
 > **Arsenal (default priority): place Bingus Shared Loader LAST, at the bottom of the load order**, then **Purge / Deploy**. If you enabled first-mod priority, place the loader first instead.
 
@@ -26,6 +26,7 @@ This is **v12 / API 1**. Replace the previous loader entry, then **Purge / Deplo
 - Sentry Aim Retention, for experimental autonomous-sentry target-loss handling.
 - Enemy Collision Synchronized, for compatible large enemy corpses across all three factions.
 - Know Your Constellation, for local enemy forecasts on mission previews and briefing.
+- Enemy Spawn Multiplier, for its separately installed encounter and patrol scaling module.
 - Controllable Hover Pack, for manual hover cutoff with native landing assistance using the Jump Pack control (default Space).
 - Vehicle Stability, for experimental local-driver yaw assistance on the Bastion and gunner FRV.
 - HUD Ballistic Trajectory Overlay **v2**, released September 11, 2026.

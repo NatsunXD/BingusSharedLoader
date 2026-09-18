@@ -33,6 +33,7 @@ for _, name in ipairs({
     'mods/cowboybingus/vehicle_stability',
     'mods/cowboybingus/hover_pack_cancel',
     'mods/cowboybingus/enemy_intelligence',
+    'mods/cowboybingus/enemy_spawn_multiplier',
     'mods/codex/gun_calibration',
 }) do
     local ok, available = pcall(function()

@@ -1,3 +1,9 @@
+## Unreleased
+
+Adds optional startup discovery for Enemy Spawn Multiplier at
+`mods/cowboybingus/enemy_spawn_multiplier`. Existing API 1 behavior, module
+failure isolation and callback forwarding remain unchanged.
+
 ## loader-v12
 
 - Registers Know Your Constellation through its stable internal module identity.

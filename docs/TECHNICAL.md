@@ -21,12 +21,13 @@ For each registered module, the coordinator first checks `Application.can_get('l
 | Vehicle Stability, optional experimental module | `mods/cowboybingus/vehicle_stability` |
 | Controllable Hover Pack | `mods/cowboybingus/hover_pack_cancel` |
 | Know Your Constellation | `mods/cowboybingus/enemy_intelligence` |
+| Enemy Spawn Multiplier | `mods/cowboybingus/enemy_spawn_multiplier` |
 | Wide Angle Stratagems, reserved | `mods/cowboybingus/wide_angle_stratagems` |
 | HUD Ballistic Trajectory Overlay v2 | `mods/codex/gun_calibration` |
 
 The withdrawn native reinforcement module name is deliberately not registered. The loader itself performs no process-memory writes and cannot establish that an optional gameplay mod behaves correctly.
 
-Loader-v12 uses internal coordinator version 13 / API 1 and checks the megapack identity before the existing gameplay registry. Megapack v7 publishes its nine-component inventory. The normal registry starts each resource once in the existing order. The pack owns its identity and component resources, while this loader owns only Wwise callbacks. The exhaustive coordinator test covers all 8,192 registry combinations with lookup and module failures. Pack and standalone copies may coexist through their shared resource identities and per-mod guards. Manager priority determines which version wins.
+Loader-v12 uses internal coordinator version 13 / API 1 and checks the megapack identity before the existing gameplay registry. Megapack v7 publishes its nine-component inventory. The normal registry starts each resource once in the existing order. The pack owns its identity and component resources, while this loader owns only Wwise callbacks. The exhaustive coordinator test covers all 16,384 registry combinations with lookup and module failures. Pack and standalone copies may coexist through their shared resource identities and per-mod guards. Manager priority determines which version wins.
 
 ## Maintained overlay support
 
