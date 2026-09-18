@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / 'build'
 CALLBACK_SHA = '05BBF52978028758B39F5B91A30A695D20069CEABD774D88755F0582A296BEC9'
 CALLBACK_PATH = 'core/wwise/lua/wwise_flow_callbacks'
-TESTED_CALLBACK_SHA = 'D07ED04A7F68D588F424D155AFD8F08B1BFC4D946C90FBC5BBBDCADE1EB69123'
+TESTED_CALLBACK_SHA = 'BF0D10CC329270FC704C841A41EF4D0D27407155989F3B9CFCB6E5A0424EFBBA'
 
 
 def run(args, **kwargs):
@@ -50,6 +50,7 @@ def main():
     resource = struct.pack('<II', len(bytecode), 2) + bytecode
     (BUILD / 'callbacks.lua.main').write_bytes(resource)
     tests = run([LUA, ROOT / 'tests/test_shared_loader.lua', ROOT / 'src', BUILD], env=env)
+    tests += run([LUA, ROOT / 'tests/test_logging.lua', ROOT / 'src'], env=env)
     (BUILD / 'offline-tests.txt').write_text(tests, encoding='utf-8')
     (BUILD / ARCHIVE).write_bytes(make_archive({resource_hash(CALLBACK_PATH): resource}))
     for suffix in ('.stream', '.gpu_resources'):
@@ -58,8 +59,8 @@ def main():
              for suffix in ('', '.stream', '.gpu_resources')}
     report = {
         'name': 'Bingus Shared Loader', 'slug': 'BingusSharedLoader',
-        'guid': '612eaf70-d682-43c7-9efd-16dcc695f977', 'revision': 'loader-v12',
-        'description': 'ARSENAL: place this loader LAST (bottom of the list) with default priority, or FIRST if first-mod priority is enabled. Required by Enemy Spawn Multiplier, Know Your Constellation, Controllable Hover Pack, Vehicle Stability, Enemy Collision Synchronized, Vanilla Plus Megapack or the separate Better Stratagem Bounce, Hellpod Steering Unlocked, Reinforcement Beacons Fixed, Consistent Vaulting, Shallow Water Diving and Sentry Aim Retention mods. Import this ZIP through Arsenal or HD2MM, enable it alongside the megapack or your chosen mods, then Deploy. Also supports HUD Ballistic Trajectory Overlay v2.',
+        'guid': '612eaf70-d682-43c7-9efd-16dcc695f977', 'revision': 'loader-v14',
+        'description': 'ARSENAL: place this loader LAST (bottom of the list) with default priority, or FIRST if first-mod priority is enabled. Required by Enemy Spawn Multiplier, Armory Preview Cache, Know Your Constellation, Controllable Hover Pack, Vehicle Stability, Enemy Collision Synchronized, Vanilla Plus Megapack or the separate Better Stratagem Bounce, Hellpod Steering Unlocked, Reinforcement Beacons Fixed, Consistent Vaulting, Shallow Water Diving and Sentry Aim Retention mods. Import this ZIP through Arsenal or HD2MM, enable it alongside the megapack or your chosen mods, then Deploy. Also supports HUD Ballistic Trajectory Overlay v2.',
         'provides': {'shared_loader_api': 1},
         'game_exe_sha256': EXE_SHA, 'game_dll_sha256': GAME_DLL_SHA,
         'deployment_files': files, 'files': {p: sha((ROOT / p).read_bytes()) for p in files.values()},

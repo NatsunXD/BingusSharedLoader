@@ -22,12 +22,13 @@ For each registered module, the coordinator first checks `Application.can_get('l
 | Controllable Hover Pack | `mods/cowboybingus/hover_pack_cancel` |
 | Know Your Constellation | `mods/cowboybingus/enemy_intelligence` |
 | Enemy Spawn Multiplier | `mods/cowboybingus/enemy_spawn_multiplier` |
+| Armory Preview Cache | `mods/cowboybingus/armory_preview_cache` |
 | Wide Angle Stratagems, reserved | `mods/cowboybingus/wide_angle_stratagems` |
 | HUD Ballistic Trajectory Overlay v2 | `mods/codex/gun_calibration` |
 
 The withdrawn native reinforcement module name is deliberately not registered. The loader itself performs no process-memory writes and cannot establish that an optional gameplay mod behaves correctly.
 
-Loader-v12 uses internal coordinator version 13 / API 1 and checks the megapack identity before the existing gameplay registry. Megapack v7 publishes its nine-component inventory. The normal registry starts each resource once in the existing order. The pack owns its identity and component resources, while this loader owns only Wwise callbacks. The exhaustive coordinator test covers all 16,384 registry combinations with lookup and module failures. Pack and standalone copies may coexist through their shared resource identities and per-mod guards. Manager priority determines which version wins.
+Loader-v14 uses internal coordinator version 15 / API 1 and checks the megapack identity before the existing gameplay registry. Megapack v10 publishes its selectable component inventory. The normal registry starts each resource once in the existing order. The pack owns its identity and component resources, while this loader owns only Wwise callbacks. The exhaustive coordinator test covers all 32,768 registry combinations with lookup and module failures. Pack and standalone copies may coexist through their shared resource identities and per-mod guards. Manager priority determines which version wins.
 
 ## Maintained overlay support
 
@@ -48,3 +49,13 @@ The fixture hash pins the reviewed release during verification. Runtime discover
 Resource tests verify distinct ownership across load orders and removal subsets. Runtime tests exercise missing modules, load failures, repeated initialization and preservation of the original Wwise callbacks. Optional checks cover the unmodified HUD+ boot and actual manager backends with locally supplied fixtures.
 
 Original game scripts are build inputs supplied by the developer, not source-distribution files. Generated archives, manager fixtures, dependency binaries, caches and history are excluded from the source export. The public artwork retains its visible AI disclosure.
+
+Armory Preview Cache is registered as `mods/cowboybingus/armory_preview_cache`. Its builder does not generate a separate loader variant.
+
+## Shared log directory
+
+Loader v14 (internal marker 15, API 1) provides `CowboyBingusModLoader.open_log(filename)` before loading gameplay modules. It creates `%LOCALAPPDATA%/CowboyBingus/Helldivers2/Logs` once per session through the Windows directory API. Each mod keeps its existing log filename, including the collision profiler. Only plain `.log` filenames are accepted; paths and traversal are rejected.
+
+The helper returns a writable file or nil. Missing environment variables, unavailable FFI, directory permissions and file-open errors cannot interrupt module discovery. Each caller also isolates its write/close operation. Modules running with an older loader continue their existing gameplay startup but skip logging; install v14 to use the new directory. Configuration and profile files are not logs and retain their existing locations.
+
+The focused logging suite covers existing directories, setup failures, file-open failures and one-time initialization. A native Windows filesystem smoke check also verifies actual directory creation without attaching to the game.
